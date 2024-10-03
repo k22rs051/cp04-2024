@@ -189,18 +189,20 @@
     function btnAClick(e){
         active = true;
         startTime = new Date(); 
+        $("#btnA").prop("disabled", true);
         
     }
 
     // ButtonBがクリックされた時の処理
     function btnBClick(e){
         active = false;
+        $("#btnA").prop("disabled", false);
     }
 
     // ButtonCがクリックされた時の処理
      function btnCClick(e){
-        alarm();
         active = false;
+        $("#btnA").prop("disabled", false);
         period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val() );
         $("#time").html("経過時間： 0");
         $("#remain").html("残り時間： " + period);
@@ -215,6 +217,10 @@
             $("#time").html("経過時間： " + etime);
             $("#remain").html("残り時間： " + rest);
             analog(rest);
+            if (rest <= 0) {
+                active = false;
+                alarm();
+            }
         }
     } 
 
