@@ -162,6 +162,7 @@
         $('#btnA').prop('disabled', false);
         $('#btnB').prop('disabled', false);
         $('#btnC').prop('disabled', false);
+        btnCClick(null);
         
     }
 
@@ -220,6 +221,7 @@
             if (rest <= 0) {
                 active = false;
                 alarm();
+                $("#btnA").prop("disabled", false);
             }
         }
     } 
