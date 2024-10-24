@@ -38,6 +38,12 @@
         $('#btnC').click(function(e) {
             btnCClick(e);
         });
+        $('#btnD').click(function(e) {
+            btnDClick(e);
+        });
+         $('#btnE').click(function(e) {
+            btnEClick(e);
+        });
         init();
     });
     
@@ -151,6 +157,7 @@
 
     // 変数宣言
     var active = false;
+    var mute = true;
     var startTime = 0;
     var period = 0;
     var rest = 0;
@@ -162,6 +169,8 @@
         $('#btnA').prop('disabled', false);
         $('#btnB').prop('disabled', false);
         $('#btnC').prop('disabled', false);
+        $('#btnD').prop('disabled', false);
+        $('#btnE').prop('disabled', true);
         btnCClick(null);
         
     }
@@ -180,7 +189,9 @@
         //音を鳴らす処理
         var audio = new Audio();
         audio.src = "pin.wav";
-        audio.play();
+        if(mute){
+            audio.play();
+        }
 
         
         
@@ -201,7 +212,7 @@
     }
 
     // ButtonCがクリックされた時の処理
-     function btnCClick(e){
+    function btnCClick(e){
         active = false;
         $("#btnA").prop("disabled", false);
         period = 60* parseInt( $("#minute").val() ) + parseInt( $("#second").val() );
@@ -215,6 +226,19 @@
         img.onload = function() {
             ctx.drawImage(img, 0, 0, 300, 300);
         };
+
+    }
+
+    function btnDClick(e){
+        mute = false;
+        $('#btnD').prop('disabled', true);
+        $('#btnE').prop('disabled', false);
+    }
+
+    function btnEClick(e){
+        mute = true;
+        $('#btnD').prop('disabled', false);
+        $('#btnE').prop('disabled', true);
     }
     
  
@@ -246,7 +270,9 @@
     <div id="time">Time</div>
     <button id="btnA">Start</button>  
     <button id="btnB">Stop</button>  
-    <button id="btnC">Set</button>  
+    <button id="btnC">Set</button>
+    <button id="btnD">ミュート</button>
+    <button id="btnE">解除</button>   
     <input type="number" id="minute" value=0 >
     <input type="number" id="second" value=15 >
 </body>
